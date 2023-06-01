@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: An example template for a creating loadbalencer.
+
+Resources: 
+ Loadbalancer: 
+  Type : AWS::ElasticLoadBalancingV2::LoadBalancer
+  Properties: 
+    Name: "myload"
+    Scheme: "internet-facing"
+    SecurityGroups : 
+     - sg-07a7396a47e218869
+    Subnets:
+     - subnet-0504d506077373bfc
+     - subnet-050d9ff904f07ff98
+    Type: "application"

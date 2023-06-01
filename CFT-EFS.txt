@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09' 
+Parameters: 
+  EfsName: 
+    Type: String 
+    Default: EFS-name 
+    Description: Name of the EFS file system 
+  ThroughputMode: 
+    Type: String 
+    Default: bursting 
+    AllowedValues: [provisioned, bursting] 
+    Description: The throughput mode of the file system 
+  PerformanceMode: 
+    Type: String 
+    Default: generalPurpose 
+    AllowedValues: [generalPurpose, maxIO] 
+    Description: The performance mode of the file system 
+  LifecyclePolicy: 
+    Type: String 
+    Default: AFTER_1_DAY 
+    Description: The lifecycle policy of the file system 
+
+Resources: 
+  EfsFileSystem: 
+    Type: AWS::EFS::FileSystem 
+    Properties: 
+      FileSystemTags: 
+        - Key: Name 
+          Value: !Ref EfsName 
+      PerformanceMode: !Ref PerformanceMode 
+      ThroughputMode: !Ref ThroughputMode 
+      LifecyclePolicies: 
+        - TransitionToIA: !Ref LifecyclePolicy

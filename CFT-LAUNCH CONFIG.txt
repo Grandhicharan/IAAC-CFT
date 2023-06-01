@@ -1,0 +1,23 @@
+Resources:
+  MyLaunchConfiguration:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties:
+      ImageId: ami-0b08bfc6ff7069aff 
+      InstanceType: t2.micro
+      SecurityGroups:
+        - sg-07a7396a47e218869 
+      KeyName: mumbai-keypair
+      AssociatePublicIpAddress: true 
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda 
+          Ebs:
+            VolumeSize: 10
+            VolumeType: gp3
+            Encrypted: false
+            DeleteOnTermination: false
+        - DeviceName: /dev/sda1  # data disk
+          Ebs:
+            VolumeSize: 10
+            VolumeType: gp3
+            Encrypted: false
+            DeleteOnTermination: false

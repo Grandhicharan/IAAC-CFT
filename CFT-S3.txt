@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09' 
+Resources: 
+  MyS3Bucket: 
+    Type: 'AWS::S3::Bucket' 
+    Properties: 
+      BucketName: cucllo
+      AccessControl: Private 
+      VersioningConfiguration: 
+        Status: Enabled 
+      LifecycleConfiguration: 
+        Rules: 
+          - Id: MoveToIA 
+            Prefix: logs 
+            Status: Enabled 
+            Transitions: 
+              - TransitionInDays: 30 
+                StorageClass: Glacier 
+            ExpirationInDays: 365
